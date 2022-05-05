@@ -1,0 +1,29 @@
+﻿@page
+@model Chinook.Web.Pages.AdminModel
+@{
+    var loadedAssemblies = Chinook.Web.Program.LoadedAssemblies.OrderBy(x => x.LoadTime);
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>LoadTime</th>
+            <th>Name</th>
+            <th>Version</th>
+            <th>ProductVersion</th>
+            <th>CertificateSubject</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loadedAssembly in loadedAssemblies)
+        {
+        <tr>
+            <td>@loadedAssembly.LoadTime</td>
+            <td>@loadedAssembly.AssemblyName.Name</td>
+            <td>@loadedAssembly.AssemblyName.Version</td>
+            <td>@loadedAssembly.VersionInfo?.ProductVersion</td>
+            <td>@loadedAssembly.Certificate?.Subject</td>
+        </tr>
+        }
+    </tbody>
+</table>
